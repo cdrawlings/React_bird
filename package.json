@@ -1,0 +1,11 @@
+{
+  "name": "react_bird",
+  "version": "1.0.0",
+  "description": "react bird app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Chris Rawlings",
+  "license": "ISC"
+}
