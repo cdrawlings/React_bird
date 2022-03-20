@@ -1,0 +1,60 @@
+.btn {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+  width: 200px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid;
+  margin: 1rem auto;
+  font-size: 1.2rem;
+}
+
+.btn-register{
+  border-color: $color-purple;
+  background-color: $color-red;
+  color: $color-light;
+}
+header {
+  background-color: $color-red;
+  box-shadow: 5px 0px 15px 6px lighten(black, 60%);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100vw;
+  height: 75px;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  color: $color-light;
+  justify-content: space-between;
+  align-self: center;
+  width: 90vw;
+
+  a {
+    color: $color-light;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+
+    li{
+      margin-left: 10px;
+    }
+  }
+}
+
+.header-title {
+  width: 80vw;
+  margin: 5vh auto 3vh;
+}
+
+h1 {
+  font-size: 1.3rem;
+  margin: 0 auto;
+  text-align: center;
+}
