@@ -17,6 +17,7 @@ const onLogout = () => {
 
     return (
         <header>
+            <nav>
             <div className="navbar">
             <Link to='/'>BirdNerd II</Link>
             <ul>
@@ -36,6 +37,7 @@ const onLogout = () => {
 
             </ul>
             </div>
+            </nav>
         </header>
     );
 }

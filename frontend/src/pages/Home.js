@@ -2,6 +2,9 @@ import React from 'react';
 import {useState} from "react";
 import {toast} from "react-toastify";
 
+import BirdResults from '../components/BirdResults'
+
+
 function Home() {
     return (
         <>
@@ -13,7 +16,7 @@ function Home() {
                 Start watching
             </section>
             <section>
-               find a bird
+               <BirdResults />
             </section>
             <section>
                last session

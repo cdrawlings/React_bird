@@ -5,6 +5,7 @@ import {toast} from "react-toastify";
 import {useSelector, useDispatch} from "react-redux";
 import {register, reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+import homeBird from "../img/desktop_landing.jpg";
 
 function Register() {
     const [formData, setFormData] = useState({
@@ -65,6 +66,9 @@ useEffect(() => {
 
     return (
         <>
+            <div className="logincontainer" style={{ backgroundImage: `url(${homeBird})` }}>
+
+                <div className="logincard">
             <section className='header-title'>
                 <h1>Register</h1>
                 <p>Create an account and start tracking the birds you see!</p>
@@ -86,6 +90,7 @@ useEffect(() => {
                     </div>
                 </form>
             </section>
+                </div></div>
 
         </>
     );

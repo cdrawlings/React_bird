@@ -9,18 +9,25 @@
 }
 
 .btn-register{
-  border-color: $color-purple;
-  background-color: $color-red;
+  border-color: $color-accent;
+  background-color: $color-primary;
   color: $color-light;
 }
-header {
-  background-color: $color-red;
-  box-shadow: 5px 0px 15px 6px lighten(black, 60%);
+
+header{
+  position: relative;
+  z-index: 5;
+}
+
+nav {
+  background-color: $color-primary;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
   display: flex;
   justify-content: center;
   align-content: center;
   width: 100vw;
-  height: 75px;
+  height: 40px;
+
 }
 
 .navbar {
@@ -30,6 +37,8 @@ header {
   justify-content: space-between;
   align-self: center;
   width: 90vw;
+  font-size: .9rem;
+  font-family: $font-stack;
 
   a {
     color: $color-light;
@@ -50,8 +59,15 @@ header {
 
 .header-title {
   width: 80vw;
-  margin: 5vh auto 3vh;
+  margin: 2vh auto 2vh;
 }
+
+.title{
+  font-family: $font-title;
+  font-size: 3rem;
+  margin: 1rem auto;
+}
+
 
 h1 {
   font-size: 1.3rem;
@@ -81,4 +97,32 @@ h1 {
   border-color: #000 transparent #555 transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
+}
+
+.logincontainer {
+  width: 100vw;
+  height: 110vh;
+  margin: -10vh 0 0;
+  background-size: cover;
+  border: 1px solid transparent;
+}
+.logincard{
+  background-color: white;
+  width: 300px;
+  padding: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+  margin: 150px auto;
+  border-radius: 5px ;
+}
+.header-title{
+  width: 80%;
+  margin: 0 auto 2rem;
+}
+.forminput{
+  width: 80%;
+  margin: 0 auto 1rem;
+}
+
+#birdlist{
+  display: none;
 }

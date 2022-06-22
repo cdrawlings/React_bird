@@ -18,6 +18,12 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    googleId: {
+        type: String,
+    },
+    displayName: {
+        type: String,
+    },
 },
     {
         timestamps: true,

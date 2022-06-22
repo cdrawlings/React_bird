@@ -5,6 +5,8 @@ import {useNavigate} from "react-router-dom";
 import {FaSignInAlt} from "react-icons/fa";
 import {useSelector, useDispatch} from "react-redux";
 import {login, reset} from '../features/auth/authSlice'
+
+import homeBird from '../img/desktop_landing.jpg'
 import Spinner from '../components/Spinner'
 
 function Login() {
@@ -60,19 +62,23 @@ function Login() {
 
     return (
         <>
-            <section className='header-title'>
-                <h1><FaSignInAlt /> Login</h1>
-            </section>
-            <section>
-                <form onSubmit={onSubmit} className='form-group'>
-                    <input className='form-control' type="email" name="email" id="email" value={email} onChange={onChange} placeholder='Email' required />
-                    <input className='form-control' type="password" name="password" id="password" value={password} onChange={onChange} placeholder='Password' required />
-                    <div className="form-group">
-                        <button type='submit' className='btn btn-register'>Submit</button>
-                    </div>
-                </form>
-            </section>
+            <div className="logincontainer" style={{ backgroundImage: `url(${homeBird})` }}>
 
+                    <div className="logincard">
+                        <section className='header-title'>
+                            <h1><FaSignInAlt /> Login</h1>
+                        </section>
+                        <section>
+                            <form onSubmit={onSubmit} className='form-group'>
+                                <input className='form-control forminput' type="email" name="email" id="email" value={email} onChange={onChange} placeholder='Email' required />
+                                <input className='form-control forminput' type="password" name="password" id="password" value={password} onChange={onChange} placeholder='Password' required />
+                                <div className="form-group">
+                                    <button type='submit' className='btn btn-register'>Submit</button>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+            </div>
         </>
     );
 }
