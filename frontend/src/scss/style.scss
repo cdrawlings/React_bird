@@ -106,6 +106,7 @@ h1 {
   background-size: cover;
   border: 1px solid transparent;
 }
+
 .logincard{
   background-color: white;
   width: 300px;
@@ -114,15 +115,91 @@ h1 {
   margin: 150px auto;
   border-radius: 5px ;
 }
+
 .header-title{
   width: 80%;
   margin: 0 auto 2rem;
 }
+
+/***  SEARCH BIRD AND ADD  ***/
+
+#birdlist{
+  display: none;
+}
+
 .forminput{
   width: 80%;
   margin: 0 auto 1rem;
 }
 
-#birdlist{
+.searchcontainer {
+  width: 400px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+}
+.search-bar {
+  width: 80%; 
+}
+
+.search-adds {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  margin: 0 0 1rem;
+}
+
+.full-list {
+  padding: 3px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  margin: 0 0 0 10%;
+}
+
+.reset {
+  padding: 3px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  margin: 0 10% 0 0;
+}
+
+.bird-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  width: 80%;
+  margin: 0 auto 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #999999;
+}
+.bird-input {
+         display: flex;
+          flex-direction: row;
+  justify-content: space-between;
+}
+
+.bird-code {
   display: none;
 }
+
+.bird-box {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  border-radius: 5px;
+  border: 1px solid #999999;
+  padding: 3px;
+  text-align: center;
+  margin: 0 0 0 10px;
+}
+

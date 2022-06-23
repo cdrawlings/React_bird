@@ -1,6 +1,20 @@
 const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
+const BirdSchema = new mongoose.Schema({
+    comName: {
+        type: String,
+    },
+    speciesCode: {
+        type: String,
+        unique: true
+    },
+    firstSpotted: {
+        type: Date,
+        default: Date.now
+    },
+})
+
+const UserSchema = mongoose.Schema({
     firstname: {
         type: String,
         required: true
@@ -24,10 +38,11 @@ const userSchema = mongoose.Schema({
     displayName: {
         type: String,
     },
+    bird: [BirdSchema]
 },
     {
         timestamps: true,
     }
 )
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', UserSchema)

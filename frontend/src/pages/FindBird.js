@@ -4,7 +4,7 @@ import {toast} from "react-toastify";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Spinner from '../components/Spinner'
-import BirdResults from "../components/BirdResults"
+import WatchBird from "../components/WatchBird"
 
 const lat = '33.89'
 const lon = '-84.51'
@@ -78,7 +78,7 @@ function FindBird() {
 </div>
 
                 {
-                    birds.map((bird) =>  <BirdResults key={bird.speciesCode} bird={bird} /> )
+                    birds.map((bird) =>  <WatchBird key={bird.speciesCode} bird={bird} /> )
                 }
 
         </>

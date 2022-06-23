@@ -2,7 +2,8 @@ import React from 'react';
 import {useState} from "react";
 import {toast} from "react-toastify";
 
-import BirdResults from '../components/BirdResults'
+import WatchBird from '../components/WatchBird'
+import Current from "../components/Current";
 
 
 function Home() {
@@ -10,13 +11,13 @@ function Home() {
         <>
             <h1>Home</h1>
             <section>
-                Todays state
+                <Current />
             </section>
             <section>
                 Start watching
             </section>
             <section>
-               <BirdResults />
+               <WatchBird />
             </section>
             <section>
                last session
