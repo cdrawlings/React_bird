@@ -48,7 +48,6 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('User not created');
     }
-    console.log('User 2:', user)
 });
 
 // Login users

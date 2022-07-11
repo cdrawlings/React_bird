@@ -1,17 +1,37 @@
+h3{
+  color:#177e89ff;
+}
+
 .btn {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
-  width: 200px;
   padding: 10px 15px;
   border-radius: 5px;
-  border: 1px solid;
-  margin: 1rem auto;
-  font-size: 1.2rem;
+  font: $font-stack;
+  font-weight: 600;
 }
 
 .btn-register{
+  width: 200px;
   border-color: $color-accent;
   background-color: $color-primary;
   color: $color-light;
+  border: 1px solid lighten($color-primary, 20%);
+  font-size: 1.2rem;
+  margin: 1rem auto;
+}
+
+.btn-dash {
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  background-color: $color-secondary;
+  color: $color-light;
+  margin: 4rem 0 1rem;
+  border: 1px solid lighten($color-secondary, 20%);
+  font-size: .9rem;
+  text-decoration: none;
+  text-align: center;
 }
 
 header{
@@ -20,14 +40,13 @@ header{
 }
 
 nav {
-  background-color: $color-primary;
+  background-color: darken($color-secondary, 10%);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
   display: flex;
   justify-content: center;
   align-content: center;
   width: 100vw;
   height: 40px;
-
 }
 
 .navbar {
@@ -63,9 +82,9 @@ nav {
 }
 
 .title{
-  font-family: $font-title;
+  font-family: $font-stack;
   font-size: 3rem;
-  margin: 1rem auto;
+  margin: 0 auto;
 }
 
 
@@ -74,6 +93,7 @@ h1 {
   margin: 0 auto;
   text-align: center;
 }
+
 
 /*  Spinner  */
 
@@ -99,6 +119,8 @@ h1 {
   animation: spin 1.2s linear infinite;
 }
 
+/*  LOGIN REGISTER PAGES  */
+
 .logincontainer {
   width: 100vw;
   height: 110vh;
@@ -121,11 +143,120 @@ h1 {
   margin: 0 auto 2rem;
 }
 
+
+/***  DASHBOARD  ***/
+.main {
+  width: 90vw;
+  height: 100%;
+  padding-bottom: 30px;
+  margin: 0 auto;
+  background-color: $color-primary;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.dashboard {
+  width: 90%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 25% 25% auto;
+  grid-template-rows: auto;
+  column-gap: 10px;
+  row-gap: 10px;
+  grid-template-areas:
+    "current start chart"
+    "seen new chart"
+;
+}
+.current{
+  grid-area: current;
+}
+.start {
+  grid-area: start;
+}
+
+.seen-bird {
+  grid-area: seen;
+}
+
+.new-bird {
+  grid-area: new;
+}
+
+.dash-chart {
+  grid-area: chart;
+}
+
+.card-dash {
+  position: relative;
+  height: 250px;
+  padding: 10px;
+  background-color: $color-light;
+  border-radius: 5px;
+  border: 0;
+}
+.card-chart {
+  padding: 10px;
+  background-color: $color-light;
+  border-radius: 5px;
+  border: 0;
+}
+
+/***  ADD A BIRD  ***/
+.main-add{
+  width: 60vw;
+  min-height: 100vh;
+  padding-bottom: 30px;
+  border: 1px solid $color-primary;
+  margin: 0 auto;
+  background-color: $color-primary;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.content{
+  width: 80%;
+  height: 100%;
+  margin: 2rem auto 0;
+  background-color: $color-light;
+  padding: 20px 0;
+  border-radius: 10px;
+}
+
+.add-text{
+  margin: 0 10% 2rem;
+}
+
+
+/***  Current  ***/
+.temp{
+  font-size: 2.5rem;
+  font-weight: 800;
+  font-family: $font-stack;
+  margin: -3 0 0;
+}
+
+.condition {
+  text-transform: capitalize;
+}
+
 /***  SEARCH BIRD AND ADD  ***/
 
 #birdlist{
   display: none;
+  width: 100%;
+  height: 100%;
+  margin: 2rem auto 0;
+  background-color: $color-light;
+  padding: 20px 0;
+  border-radius: 10px;
 }
+#seenist{
+  width: 100%;
+  height: 100%;
+  margin: 2rem auto 0;
+  background-color: $color-light;
+  padding: 20px 0;
+  border-radius: 10px;
+}
+
 
 .forminput{
   width: 80%;
@@ -133,12 +264,12 @@ h1 {
 }
 
 .searchcontainer {
-  width: 400px;
-  padding: 10px;
-  background-color: white;
-  border-radius: 5px;
-  border: 1px solid #cccccc;
+  width: 80%;
+  height: 100%;
+  margin: 2rem auto 0;
+  border-radius: 10px;
 }
+
 .search-bar {
   width: 80%; 
 }
@@ -157,6 +288,9 @@ h1 {
   border-radius: 5px;
   border: 1px solid #cccccc;
   margin: 0 0 0 10%;
+  font-weight: 600;
+  font-size: .8rem;
+
 }
 
 .reset {
@@ -165,6 +299,8 @@ h1 {
   border-radius: 5px;
   border: 1px solid #cccccc;
   margin: 0 10% 0 0;
+  font-weight: 600;
+  font-size: .8rem;
 }
 
 .bird-item {
@@ -177,10 +313,13 @@ h1 {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #999999;
+  font-weight: 400;
+  font-size: 1rem;
 }
+
 .bird-input {
-         display: flex;
-          flex-direction: row;
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 
@@ -201,5 +340,9 @@ h1 {
   padding: 3px;
   text-align: center;
   margin: 0 0 0 10px;
+  cursor: pointer;
 }
 
+@media only screen and (min-width: 800px)  {
+
+}

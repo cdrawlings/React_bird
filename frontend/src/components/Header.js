@@ -19,7 +19,7 @@ const onLogout = () => {
         <header>
             <nav>
             <div className="navbar">
-            <Link to='/'>BirdNerd II</Link>
+            <Link to='/'>React Bird Watcher</Link>
             <ul>
                 {user ? (
                     <li>

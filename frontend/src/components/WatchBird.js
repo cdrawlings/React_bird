@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import {useEffect, useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
@@ -58,7 +58,7 @@ function WatchBird() {
     }
 
     const fillList = () => {
-        let allBirds = document.getElementById('full-list')
+
         let birdList = document.getElementById('birdlist')
 
         birdList.style.display = 'block'
@@ -111,10 +111,6 @@ function WatchBird() {
                     </div>
 
                 </div>
-
-                <div className="">Birds spotted</div>
-
-                <p className="">List</p>
             </>
         )
     } else {

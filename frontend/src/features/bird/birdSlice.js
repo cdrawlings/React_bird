@@ -2,72 +2,121 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import birdService from "./birdService";
 
 const initialState = {
-    birds: birds ? birds : null,
+    birds: [],
+    last:{},
     isError: false,
     isSuccess: false,
     isLoading: false,
-    message: ''
+    message: '',
 }
 
-export const eBird = createAsyncThunk('auth/login', async (birds, thunkAPI) => {
+// Add newly viewed bird to the database
+export const addBird = createAsyncThunk(
+    'bird/add', async (addData, thunkAPI) => {
     try {
-        return await birdService.eBird(birds)
+        const token = thunkAPI.getState().auth.user.token
+        return await birdService.addBird(addData, token)
     } catch (e) {
-        const message = (e.message && e.response.data && e.response.data.message)
-            || e.message || e.toString()
+        const message =
+            (e.message &&
+                e.response.data &&
+                e.response.data.message) ||
+            e.message || e.toString()
 
         return thunkAPI.rejectWithValue(message)
+        }
     }
-})
+)
 
-export const authSlice = createSlice({
-    name: 'auth',
+
+// Get all birds seen by user
+export const getBirds = createAsyncThunk(
+    'bird/getall', async (_, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await birdService.getBirds(token)
+        } catch (e) {
+            const message =
+                (e.message &&
+                    e.response.data &&
+                    e.response.data.message) ||
+                e.message || e.toString()
+
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
+
+// Get get last bird entered
+export const getLast = createAsyncThunk(
+    'bird/getlast', async (_, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await birdService.getLast(token)
+        } catch (e) {
+            const message =
+                (e.message &&
+                    e.response.data &&
+                    e.response.data.message) ||
+                e.message || e.toString()
+
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+
+)
+
+
+export const birdSlice = createSlice({
+    name: "bird",
     initialState,
     reducers: {
-        reset: (state) => {
-            state.isLoading = false
-            state.isSuccess = false
-            state.isError = false
-            state.message = ''
-        }
+        reset: (state) => initialState
     },
     extraReducers: (builder) => {
         builder
-            .addCase(register.pending, (state) => {
+            .addCase(addBird.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(register.fulfilled, (state, action) => {
+            .addCase(addBird.fulfilled, (state) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.user = action.payload
             })
-            .addCase(register.rejected, (state, action) => {
+            .addCase(addBird.rejected, (state, action) => {
                 state.isLoading = false
-                state.user = null
                 state.isError = true
                 state.message = action.payload
             })
-            .addCase(login.pending, (state) => {
+            .addCase(getBirds.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(login.fulfilled, (state, action) => {
+            .addCase(getBirds.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.user = action.payload
+                state.birds = action.payload
             })
-            .addCase(login.rejected, (state, action) => {
+            .addCase(getBirds.rejected, (state, action) => {
                 state.isLoading = false
-                state.user = null
                 state.isError = true
                 state.message = action.payload
             })
-            .addCase(logout.fulfilled, (state) => {
-                state.user = null
+            .addCase(getLast.pending, (state) => {
+                state.isLoading = true
             })
-    },
+            .addCase(getLast.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.last = action.payload
+            })
+            .addCase(getLast.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+    }
 })
 
 
-
-export const {reset} = authSlice.actions
-export default authSlice.reducer
+export const {reset} = birdSlice.actions
+export default birdSlice.reducer

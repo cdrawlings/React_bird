@@ -1,18 +1,5 @@
 const mongoose = require('mongoose');
 
-const BirdSchema = new mongoose.Schema({
-    comName: {
-        type: String,
-    },
-    speciesCode: {
-        type: String,
-        unique: true
-    },
-    firstSpotted: {
-        type: Date,
-        default: Date.now
-    },
-})
 
 const UserSchema = mongoose.Schema({
     firstname: {
@@ -38,11 +25,14 @@ const UserSchema = mongoose.Schema({
     displayName: {
         type: String,
     },
-    bird: [BirdSchema]
+    bird: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Bird'
+    },
 },
     {
         timestamps: true,
-    }
+    },
 )
 
 module.exports = mongoose.model('User', UserSchema)

@@ -81,8 +81,13 @@ useEffect(() => {
                            onChange={onChange} placeholder='Last name' required/>
                     <input className='form-control' type="email" name="email" id="email" value={email}
                            onChange={onChange} placeholder='Email' required/>
-                    <input className='form-control' type="password" name="password" id="password" value={password}
-                           onChange={onChange} placeholder='Password' required/>
+                    <input className='form-control'
+                           type="password"
+                           name="password"
+                           id="password"
+                           value={password}
+                           onChange={onChange}
+                           placeholder='Password' required/>
                     <input className='form-control' type="password" name="password2" id="password2" value={password2}
                            onChange={onChange} placeholder='Confirm password' required/>
                     <div className="form-group">
