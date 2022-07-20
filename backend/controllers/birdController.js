@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const User = require('../model/userModel')
 const Bird = require('../model/birdModel')
+const bcrypt = require("bcryptjs");
 
 
 
@@ -75,8 +76,6 @@ const  getLast = asyncHandler(async (req, res) => {
     console.log("Bird 3", bird[0])
 
     res.status(200).json(bird[0])
-
-
 });
 
 

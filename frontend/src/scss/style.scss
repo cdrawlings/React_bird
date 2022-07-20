@@ -225,7 +225,7 @@ h1 {
 }
 
 
-/***  Current  ***/
+/***  Weather  ***/
 .temp{
   font-size: 2.5rem;
   font-weight: 800;
@@ -342,6 +342,10 @@ h1 {
   margin: 0 0 0 10px;
   cursor: pointer;
 }
+
+// verify single bird sighting
+#map { height: 180px; }
+
 
 @media only screen and (min-width: 800px)  {
 

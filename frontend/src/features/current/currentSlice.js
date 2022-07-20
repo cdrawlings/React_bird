@@ -6,7 +6,7 @@ const initialState = {
     isLoading: true,
 }
 
-const locationSlice = createSlice({
+const currentSlice = createSlice({
     name: "location",
     initialState,
     reducers: {
@@ -16,5 +16,5 @@ const locationSlice = createSlice({
     }
 })
 
-export const { addLocation } = locationSlice.actions
-export default locationSlice.reducer
+export const { addLocation } = currentSlice.actions
+export default currentSlice.reducer

@@ -10,6 +10,7 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons";
 
 function SeenBirds() {
     const {birds, isLoading, isSuccess} = useSelector((state) => state.bird )
+    const {location} = useSelector((state) => state.current)
 
     const dispatch = useDispatch()
 
@@ -28,6 +29,8 @@ function SeenBirds() {
     if (isLoading){
         return <Spinner />
     }
+
+    console.log("Super location", location)
 
     return (
         <>

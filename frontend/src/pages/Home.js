@@ -1,13 +1,12 @@
 import React from 'react';
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addLocation} from "../features/location/locationSlice";
-import Current from "../components/Current";
+import {addLocation} from "../features/current/currentSlice";
+// import Weather from "../components/Weather"
 import { Link } from 'react-router-dom'
 
-
 function Home() {
-    const {location} = useSelector((state) => state.location)
+    const {location} = useSelector((state) => state.current)
 
     const dispatch = useDispatch();
 
@@ -20,23 +19,42 @@ function Home() {
     const getCoords = async () => {
         navigator.geolocation.getCurrentPosition(async position => {
             const locApi = "AIzaSyAF2o2lBWk9H8JQhpwvI_U9e5rFZUikQY4";
+
             const lat = position.coords.latitude
             const lon = position.coords.longitude
 
-            // Get location information
+            // Get current information
             const response = await fetch(
                 `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${locApi}`
             )
 
             let data = await response.json()
             let city = data.results[0].address_components[3].long_name
+            const apiKey = 'c2badbed053fc07c15b017c4906fade6';
 
+            /*
+            const weatherResponse = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,daily,minutely,alerts&appid=${apiKey}&units=imperial`)
+
+            const responseData = await weatherResponse.json()
+
+            console.log(responseData);
+            const temp = responseData.current.temp;
+            const condition = responseData.current.weather[0].description;
+            const icon = responseData.current.weather[0].icon;
+            const visibility = responseData.current.visibility;
+
+
+             */
             const placeData = {
-                lat, lon, city
+                lat, lon, city,  // temp, condition, icon,  visibility
             }
+
             dispatch(addLocation(placeData))
         })
     }
+
+    console.log("location", location)
+
 
 
     return (
@@ -50,6 +68,7 @@ function Home() {
                         <p>Lat: {location.lat} </p>
                         <p> Lon: {location.lon} </p>
                         <p> City: {location.city} </p>
+
 
 
                     </div>

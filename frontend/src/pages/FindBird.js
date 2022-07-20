@@ -26,7 +26,7 @@ function FindBird() {
         speciesCode: '',
     })
 
-    const {location} = useSelector((state) => state.location)
+    const {location} = useSelector((state) => state.current)
     const  { isLoading, isError, isSuccess, message } = useSelector((state) => state.bird)
 
     const lat = location.lat
