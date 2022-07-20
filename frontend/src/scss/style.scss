@@ -343,10 +343,56 @@ h1 {
   cursor: pointer;
 }
 
-// verify single bird sighting
-#map { height: 180px; }
+
+.seen_title {
+  font-family: $font-stack;
+  font-size: 1.5rem;
+  margin: 0 auto;
+}
+
+.seen_bird {
+  font-size: 2rem;
+  color: black;
+}
+
+.seen_name {
+  font-size: 1.5rem;
+  color: black;
+  font-weight: 600;
+}
+
+.seen_time {
+  font-size: 1rem;
+  color: black;
+  font-weight: 400;
+}
+
+.seen_city {
+  font-size: 1rem;
+  color: black;
+  font-weight: 600;
+}
+
+.leafletContainer {
+  margin: 0 auto;
+}
+
+.map_container {
+  height: 300px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.minus_button {
+  font-size: 2rem;
+}
+
+.add_button {
+  font-size: 2rem;
+  color: #000000;
+}
 
 
-@media only screen and (min-width: 800px)  {
+@media only screen and (min-width: 800px) {
 
 }
