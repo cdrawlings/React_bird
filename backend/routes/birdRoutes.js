@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {getBirds, createBird, getLast} = require('../controllers/birdController')
+const {getBirds, createBird, getLast, postSingle} = require('../controllers/birdController')
 const {protect} = require('../middleware/authMiddleware')
 
 
@@ -10,7 +10,6 @@ router.post('/', protect, createBird)
 
 router.get('/new_bird', protect, getLast)
 
-
-// router.get('/:id', protect)
+router.post('/single', protect, postSingle)
 
 module.exports = router
