@@ -59,11 +59,9 @@ const  getBirds = asyncHandler(async (req, res) => {
 // Route    api/bird/last
 const  getLast = asyncHandler(async (req, res) => {
     //Get user with ID  in JWT
-    console.log("Bird 1")
 
     const user = await User.findById(req.user.id)
 
-    console.log("Bird 1", user)
 
     if(!user) {
         res.status(401)

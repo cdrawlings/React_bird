@@ -1,4 +1,4 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import birdService from "./birdService";
 
 const initialState = {
@@ -64,7 +64,6 @@ export const getLast = createAsyncThunk(
             return thunkAPI.rejectWithValue(message)
         }
     }
-
 )
 
 

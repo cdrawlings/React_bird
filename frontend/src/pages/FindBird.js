@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {toast} from 'react-toastify'
 import {addBird, reset} from "../features/bird/birdSlice";
@@ -105,12 +105,6 @@ function FindBird() {
     const getId = (e) => {
         let comName = e.currentTarget.previousElementSibling.previousElementSibling.innerText;
         let speciesCode = e.currentTarget.previousElementSibling.innerText;
-
-        setNewBird((prevState) => ({
-            ...prevState,
-            comName: comName,
-            speciesCode: speciesCode
-        }))
 
         const spotted = {
             comName,

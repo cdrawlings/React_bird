@@ -10,6 +10,6 @@ router.post('/', protect, createBird)
 
 router.get('/new_bird', protect, getLast)
 
-router.post('/single', protect, postSingle)
+router.post('/new_bird', protect, postSingle)
 
 module.exports = router

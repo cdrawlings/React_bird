@@ -16,29 +16,26 @@ const CountSchema = new mongoose.Schema({
 })
 
 const SessionSchema = new mongoose.Schema({
-    temperature: {
-        type: String,
-        required: true
-    },
-    condition: {
-        type: String,
-        required: true
-    },
-    visibility: {
-        type: String,
-        required: true
+        temperature: {
+            type: String
+        },
+        condition: {
+            type: String
+        },
+        visibility: {
+            type: String
+        },
+        icon: {
+            type: String
         },
         lat: {
-            type: Number,
-            required: true
+            type: Number
         },
         lon: {
-            type: Number,
-            required: true
+            type: Number
         },
         city: {
-            type: String,
-            required: true
+            type: String
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,

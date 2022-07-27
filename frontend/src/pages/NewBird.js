@@ -1,41 +1,58 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {addBird, getLast, reset} from "../features/bird/birdSlice";
+import {useNavigate} from "react-router-dom";
+import {getLast} from "../features/bird/birdSlice"
+import {addSession, reset} from "../features/session/sessionSlice";
 import dayjs from 'dayjs';
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
-
 import Spinner from "../components/Spinner";
-
-// import Spinner from "../components/Spinner";
-
+import {toast} from "react-toastify";
 
 
 function NewBird() {
     const {user} = useSelector((state) => state.auth)
-    const {last, isLoading, isSuccess} = useSelector((state) => state.bird)
+    const {last} = useSelector((state) => state.bird)
     const {location} = useSelector((state) => state.current)
 
-    // States
-    const [newbird, setNewBird] = useState({
+    const {isLoading, isError, isSuccess, message} = useSelector((state) => state.session)
+
+    const [count, setCount] = useState(1)
+    const [watch, setWatch] = useState({
+        city: '',
+        lat: '',
+        lon: '',
+        // icon: '',
+        // temperature: '',
+        // visibility: '',
+        // condition: '',
+        count: '',
         comName: '',
-        speciesCode: '',
+        speciesCodev: '',
+        birdid: '',
+        user: '',
     })
 
-    const [count, setCount] = useState(0)
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    useEffect(() => {
-        return () => {
-            if (isSuccess) {
-                dispatch(reset())
-            }
-        }
-    }, [dispatch, isSuccess])
 
     useEffect(() => {
         dispatch(getLast())
     }, [dispatch])
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
+
+        if (isSuccess) {
+            dispatch(reset)
+            navigate('/')
+        }
+
+        dispatch(reset())
+    }, [dispatch, isError, isSuccess, navigate, message])
 
     if (isLoading) {
         return <Spinner/>
@@ -45,7 +62,6 @@ function NewBird() {
     const addOne = () => {
         // Counter state is incremented
         setCount(count + 1);
-
     }
 
     // Minus one to count
@@ -54,51 +70,42 @@ function NewBird() {
         setCount(c => Math.max(c - 1, 0));
     }
 
-    // Add new bird and information to database
-    const add_session = (e) => {
-        let comName, city, user, code, bird, lat, lon, count
+    const getData = (e) => {
+        console.log("pressed");
+        let city = document.getElementById('add_city').innerText;
+        let lat = document.getElementById('add_lat').innerText;
+        let lon = document.getElementById('add_lon').innerText;
+        // let temperature = document.getElementById('add_temp').innerText;
+        // let visibility = document.getElementById('add_vis').innerText;
+        // let condition = document.getElementById('add_cond').innerText;
+        // let icon = document.getElementById('add_icon').innerText;
+        let comName = document.getElementById('add_comName').innerText;
+        let speciesCode = document.getElementById('add_speciesCode').innerText;
+        let birdid = document.getElementById('add_bird_id').innerText;
+        let user = document.getElementById('add_user').innerText;
 
-        comName = document.getElementById('add_comName').innerText;
-        city = document.getElementById('add_city').innerText;
-        user = document.getElementById('add_user').innerText;
-        code = document.getElementById('add_speciesCode').innerText;
-        lat = document.getElementById('add_lat').innerText;
-        lon = document.getElementById('add_lon').innerText;
-        bird = document.getElementById('add_bird_id').innerText;
-        // let temp = document.getElementById('add_temp').innerText
-        // let cond = document.getElementById('add_cond').innerText
-        // let visibility = document.getElementById('add_vis').innerText
-        // let icon = document.getElementById('add_icon').innerText
-        count = document.getElementById('add_count').innerText;
-        console.log('Add Session')
 
-        console.log("sess: ", comName, city, user, code, bird, lat, lon, count)
-
-        setNewBird((prevState) => ({
+        setWatch((prevState) => ({
             ...prevState,
-            comName: comName,
-            speciesCode: code,
             city,
-            user,
-            birdid: bird,
             lat,
             lon,
-            count
-        }))
-
-        const spotted = {
+            // icon,
+            // temperature,
+            // visibility,
+            // condition,
+            count,
             comName,
-            speciesCode: code,
-            city,
-            user,
-            birdid: bird,
-            lat,
-            lon,
-            count
-        }
-        dispatch(addBird(spotted))
+            speciesCode,
+            birdid,
+            user
+        }))
+        console.log("get data 1", watch)
+        dispatch(addSession(watch))
 
     }
+    console.log("get data 2", watch)
+
 
     const position = [location.lat, location.lon]
     const date = dayjs(last.createdAt).format('dddd, MMMM D, YYYY')
@@ -157,7 +164,7 @@ function NewBird() {
 
                             </div>
                         </div>
-                        <button id='add_session_btn' onClick={add_session} className="add_session_btn">ACCEPT</button>
+                        <button id='add_session_btn' onClick={getData} className="add_session_btn">ACCEPT</button>
 
 
                     </article>
@@ -170,10 +177,10 @@ function NewBird() {
 }
 
 /*
-<p>Temp: {location.temp}</p>
-<p>Cond: {location.condition}</p>
-<p>Visibility: {location.visibility}</p>
-<p>Icon: {location.icon}</p>
+<p id='add_temp'>Temp: {location.temp}</p>
+<p id='add_cond'>Cond: {location.condition}</p>
+<p id='add_visn'>Visibility: {location.visibility}</p>
+<p id='add_icon'>Icon: {location.icon}</p>
  */
 
 export default NewBird;
