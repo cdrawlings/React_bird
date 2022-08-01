@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {getLast} from "../features/bird/birdSlice"
-import {addSession, reset} from "../features/session/sessionSlice";
+import {getLast, reset} from "../features/bird/birdSlice"
+import {AddSession, rereset} from "../features/session/sessionSlice";
 import dayjs from 'dayjs';
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import Spinner from "../components/Spinner";
@@ -14,24 +14,9 @@ function NewBird() {
     const {last} = useSelector((state) => state.bird)
     const {location} = useSelector((state) => state.current)
 
-    const {isLoading, isError, isSuccess, message} = useSelector((state) => state.session)
+    const {isLoading, isError, isSuccess, message,} = useSelector((state) => state.session)
 
     const [count, setCount] = useState(1)
-    const [watch, setWatch] = useState({
-        city: '',
-        lat: '',
-        lon: '',
-        // icon: '',
-        // temperature: '',
-        // visibility: '',
-        // condition: '',
-        count: '',
-        comName: '',
-        speciesCodev: '',
-        birdid: '',
-        user: '',
-    })
-
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -47,11 +32,11 @@ function NewBird() {
         }
 
         if (isSuccess) {
-            dispatch(reset)
+            dispatch(reset())
             navigate('/')
         }
 
-        dispatch(reset())
+        dispatch(rereset())
     }, [dispatch, isError, isSuccess, navigate, message])
 
     if (isLoading) {
@@ -59,34 +44,33 @@ function NewBird() {
     }
 
     // Add one to count
-    const addOne = () => {
+    const addOne = (e) => {
         // Counter state is incremented
         setCount(count + 1);
     }
 
     // Minus one to count
-    const minusOne = () => {
+    const minusOne = (e) => {
         // Counter state is incremented
         setCount(c => Math.max(c - 1, 0));
     }
 
     const getData = (e) => {
-        console.log("pressed");
-        let city = document.getElementById('add_city').innerText;
-        let lat = document.getElementById('add_lat').innerText;
-        let lon = document.getElementById('add_lon').innerText;
+
+        let city = location.city;
+        let lat = location.lat;
+        let lon = location.lon;
         // let temperature = document.getElementById('add_temp').innerText;
         // let visibility = document.getElementById('add_vis').innerText;
         // let condition = document.getElementById('add_cond').innerText;
         // let icon = document.getElementById('add_icon').innerText;
-        let comName = document.getElementById('add_comName').innerText;
-        let speciesCode = document.getElementById('add_speciesCode').innerText;
-        let birdid = document.getElementById('add_bird_id').innerText;
-        let user = document.getElementById('add_user').innerText;
+        let comName = last.comName;
+        let speciesCode = last.speciesCode;
+        let birdid = last.id;
+        let user = last.user
 
 
-        setWatch((prevState) => ({
-            ...prevState,
+        let sessData = {
             city,
             lat,
             lon,
@@ -99,13 +83,11 @@ function NewBird() {
             speciesCode,
             birdid,
             user
-        }))
-        console.log("get data 1", watch)
-        dispatch(addSession(watch))
+        }
+
+        dispatch(AddSession(sessData))
 
     }
-    console.log("get data 2", watch)
-
 
     const position = [location.lat, location.lon]
     const date = dayjs(last.createdAt).format('dddd, MMMM D, YYYY')
@@ -164,7 +146,7 @@ function NewBird() {
 
                             </div>
                         </div>
-                        <button id='add_session_btn' onClick={getData} className="add_session_btn">ACCEPT</button>
+                        <button onClick={getData} className="add_session_btn">ACCEPT</button>
 
 
                     </article>

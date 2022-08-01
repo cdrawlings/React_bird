@@ -1,36 +1,8 @@
 import React from 'react';
-import {useEffect} from "react";
-import {useSelector, useDispatch} from "react-redux";
-import {getBirds, reset} from "../features/bird/birdSlice";
-import Spinner from "../components/Spinner";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
-
-// Goes to bird ID page for info on seen bird
+import {useSelector} from "react-redux";
 
 function SeenBirds() {
-    const {birds, isLoading, isSuccess} = useSelector((state) => state.bird )
-    const {location} = useSelector((state) => state.current)
-
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        return () => {
-            if(isSuccess) {
-                dispatch(reset())
-            }
-        }
-    }, [dispatch,isSuccess])
-
-    useEffect(() => {
-        dispatch(getBirds())
-    }, [dispatch])
-
-    if (isLoading){
-        return <Spinner />
-    }
-
-    console.log("Super location", location)
+    const {birds} = useSelector((state) => state.bird)
 
     return (
         <>

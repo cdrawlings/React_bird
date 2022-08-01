@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler')
 const User = require('../model/userModel')
 const Bird = require('../model/birdModel')
 const Session = require('../model/sessionModel')
-const Count = require('../model/sessionModel')
+
 
 
 // Post a new  bird
@@ -11,28 +11,36 @@ const createBird = asyncHandler(async (req, res) => {
 //Get user with ID  in JWT
     const user = await User.findById(req.user.id)
 
-    if(!user) {
+    if (!user) {
         res.status(401)
         throw new Error("User not found")
     }
 
-    try{
-        let session =  new Bird()
+    const seen = await Bird.exists({
+        speciesCode: req.body.speciesCode,
+        user: req.user.id
+    })
+
+    if (seen) {
+        res.status(401)
+        throw new Error("You have already spotted that bird!")
+    }
+
+    try {
+        let session = new Bird()
         session.comName = req.body.comName
         session.speciesCode = req.body.speciesCode
         session.user = req.user.id
         session.save(function (err) {
-            if (err){
+            if (err) {
                 console.log(err)
             } else {
-                console.log("New Bird Added")
             }
         })
-        console.log("id: ", session)
         res.status(200).json(session)
     } catch (err) {
         console.error(err)
-        res.status(400).json({message: "oops"})
+        res.status(400).json({message: "Bird not added to your spotted birds"})
     }
 });
 
@@ -62,15 +70,12 @@ const  getLast = asyncHandler(async (req, res) => {
 
     const user = await User.findById(req.user.id)
 
-
     if(!user) {
         res.status(401)
         throw new Error("User not found")
     }
 
     const bird = await Bird.find({user: req.user.id}).sort({createdAt: -1}).limit(1)
-
-    console.log("Bird 3", bird[0])
 
     res.status(200).json(bird[0])
 });
@@ -85,62 +90,69 @@ const postSingle = asyncHandler(async (req, res) => {
         throw new Error("User not found")
     }
 
-    const update = await Session.updateOne(
-        {"_id": user},
-        {
-
-            $set: {
-                temperature: req.body.temperature,
-                condition: req.body.condition,
-                visibility: req.body.visibility,
-                city: req.body.city,
-                lon: req.body.lon,
-                lat: req.body.lat
-            },
-            $addToSet: {
-                count: {
-                    count: req.body.count,
-                    comName: req.body.comName,
-                    speciesCode: req.body.speciesCode,
-                    birdid: req.body.birdid,
-                }
-            }
-        }, {
-            new: true,
-            upsert: true,
-            rawResult: true
-        });
-
-    /*
-        try{
-            let session =  new Session()
-            session.temperature = req.body.temperature
-            session.condition = req.body.condition
-            session.visibility = req.body.visibility
-            session.lat = req.body.lat
-            session.lon = req.body.lon
-            session.city = req.body.city
-
-            session.save(function (err) {
-                if (err) {
-                    console.log(err)
-                } else {
-                    console.log("New bird Added")
-                }
-            })
-
-
-
-
-
-        } catch (err) {
-            console.error(err)
-            res.status(400).json({message: "oops"})
+    const update = await Session.create({
+        temperature: req.body.temperature,
+        condition: req.body.condition,
+        visibility: req.body.visibility,
+        icon: req.body.icon,
+        city: req.body.city,
+        lon: req.body.lon,
+        lat: req.body.lat,
+        user,
+        count: {
+            count: req.body.count,
+            comName: req.body.comName,
+            speciesCode: req.body.speciesCode,
+            birdid: req.body.birdid,
         }
-
-     */
+    });
 
     res.status(200).json({message: "Posted single bird"})
+
+});
+
+
+// Post birds  from watching session
+// Route    api/bird/watch
+const postStart = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user.id)
+
+    if (!user) {
+        res.status(401)
+        throw new Error("User not found")
+    }
+
+    const update = await Session.create({
+        temperature: req.body.temperature,
+        condition: req.body.condition,
+        visibility: req.body.visibility,
+        icon: req.body.icon,
+        city: req.body.city,
+        lon: req.body.lon,
+        lat: req.body.lat,
+    })
+
+    let id = update._id;
+    console.log("id", id)
+
+    res.status(200).json({message: "Posted"})
+
+});
+
+
+// Get Start a bird watching session
+// Route    api/bird/watch
+const getWatch = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user.id)
+
+    if (!user) {
+        res.status(401)
+        throw new Error("User not found")
+    }
+
+    const session = await Session.find({user: req.user.id}).sort({createdAt: -1}).limit(1)
+
+    res.status(200).json("session[0]")
 
 });
 
@@ -149,5 +161,7 @@ module.exports = {
     getBirds,
     createBird,
     getLast,
-    postSingle
+    postSingle,
+    postStart,
+    getWatch
 }

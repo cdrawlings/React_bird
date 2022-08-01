@@ -17,7 +17,7 @@ const CountSchema = new mongoose.Schema({
 
 const SessionSchema = new mongoose.Schema({
         temperature: {
-            type: String
+            type: Number
         },
         condition: {
             type: String

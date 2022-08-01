@@ -1,20 +1,30 @@
-import React from 'react';
-import {useEffect} from "react";
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {addLocation} from "../features/current/currentSlice";
+import {getBirds} from "../features/bird/birdSlice";
 // import Weather from "../components/Weather"
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 function Home() {
     const {location} = useSelector((state) => state.current)
+    const {birds, isSuccess, isLoading} = useSelector((state) => state.bird)
+
+    console.log("Seen:", birds)
+
+    //   const {last} = useSelector((state) => state.bird)
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         getCoords()
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+
+    useEffect(() => {
+        dispatch(getBirds())
+    }, [dispatch])
+
 
     const getCoords = async () => {
         navigator.geolocation.getCurrentPosition(async position => {
@@ -32,19 +42,7 @@ function Home() {
             let city = data.results[0].address_components[3].long_name
             const apiKey = 'c2badbed053fc07c15b017c4906fade6';
 
-            /*
-            const weatherResponse = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,daily,minutely,alerts&appid=${apiKey}&units=imperial`)
 
-            const responseData = await weatherResponse.json()
-
-            console.log(responseData);
-            const temp = responseData.current.temp;
-            const condition = responseData.current.weather[0].description;
-            const icon = responseData.current.weather[0].icon;
-            const visibility = responseData.current.visibility;
-
-
-             */
             const placeData = {
                 lat, lon, city,  // temp, condition, icon,  visibility
             }
@@ -52,10 +50,6 @@ function Home() {
             dispatch(addLocation(placeData))
         })
     }
-
-    console.log("location", location)
-
-
 
     return (
         <>
@@ -69,19 +63,28 @@ function Home() {
                         <p> Lon: {location.lon} </p>
                         <p> City: {location.city} </p>
 
-
-
                     </div>
 
                     <div className="card-dash start">
                         <h3>START BIRD WATCHING</h3>
                         <p>Keep track of all the birds you see this session</p>
-                        <Link to='add_bird' className='btn btn-dash'>BIRD WATCH</Link>
+                        <Link to='start' className='btn btn-dash'>BIRD WATCH</Link>
                     </div>
 
                     <div className="card-dash seen-bird">
                         <h3>MY BIRDS</h3>
                         <p>Keep track of all the birds you see this session.</p>
+                        <ul id='seenlist' className='content'>
+                            {birds.map((bird) => {
+                                return (
+                                    <li className='bird-item' key={bird.comName}>
+
+                                        <p>{bird.comName}</p>
+                                        <p>{bird.speciesCode}</p>
+                                    </li>
+                                )
+                            })}
+                        </ul>
                         <Link to='birds' className='btn btn-dash'>VIEW</Link>
                     </div>
 
