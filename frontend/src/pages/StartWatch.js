@@ -36,7 +36,7 @@ function NewBird() {
         }
 
         dispatch(StartWatch(sessData))
-        navigate('/watching')
+        navigate('/watch')
 
     }
 

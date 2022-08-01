@@ -150,9 +150,10 @@ const getWatch = asyncHandler(async (req, res) => {
         throw new Error("User not found")
     }
 
-    const session = await Session.find({user: req.user.id}).sort({createdAt: -1}).limit(1)
 
-    res.status(200).json("session[0]")
+    const session = await Session.find({user: user}).sort({createdAt: -1}).limit(1)
+
+    res.status(200).json(session[0])
 
 });
 

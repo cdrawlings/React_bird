@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 const API_URL = '/api/bird/'
 
 // This adds a single bird to the session DB

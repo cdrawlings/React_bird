@@ -15,6 +15,7 @@ function Watching() {
         }
     })
 
+    console.log('watching', session)
 
     return (
         <div>
