@@ -11,9 +11,12 @@ const CountSchema = new mongoose.Schema({
         type: String,
     },
     birdid: {
-        type: String,
-    }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Bird'
+    },
+    lastSeen: Date,
 })
+
 
 const SessionSchema = new mongoose.Schema({
         temperature: {

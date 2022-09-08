@@ -22,15 +22,10 @@ const UserSchema = new mongoose.Schema({
         googleId: {
             type: String,
         },
-    displayName: {
-        type: String,
-    },
-    bird: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Bird'
-    },
-},
-    {
+        displayName: {
+            type: String,
+        },
+    }, {
         timestamps: true,
     },
 )

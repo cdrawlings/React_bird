@@ -14,6 +14,8 @@ function NewBird() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    let userID = user._id
+
     const getData = (e) => {
         let city = location.city;
         let lat = location.lat;
@@ -28,13 +30,14 @@ function NewBird() {
             city,
             lat,
             lon,
-            user,
+            user: user._id,
             // icon,
             // temperature,
             // visibility,
             // condition
         }
 
+        console.log(sessData)
         dispatch(StartWatch(sessData))
         navigate('/watch')
 

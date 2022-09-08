@@ -335,6 +335,7 @@ h1 {
   font-size: 1rem;
 }
 
+
 .bird-input {
   display: flex;
   flex-direction: row;
@@ -451,12 +452,55 @@ h1 {
   font-size: 2rem;
   color: #000000;
   border: 0;
+  background-color: transparent;
 }
 
 .count_elem {
   font-size: 2rem;
   color: $color-secondary;
   margin: 0 1rem;
+}
+
+.spotted_elem {
+  font-size: 1.3rem;
+  color: $color-secondary;
+  margin: 0 .25rem;
+  width: 2rem;
+  text-align: center;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.count-elem {
+  display: flex;
+  flex-direction: row;
+}
+
+.spotted-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  width: 90%;
+  margin: 0 auto 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #999999;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.spotted_name {
+  align-self: center;
 }
 
 .map_container {

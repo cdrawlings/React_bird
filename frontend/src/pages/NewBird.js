@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {getLast, reset} from "../features/bird/birdSlice"
-import {AddSession, rereset} from "../features/session/sessionSlice";
+import {AddSession, reset as update} from "../features/session/sessionSlice";
 import dayjs from 'dayjs';
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import Spinner from "../components/Spinner";
@@ -36,7 +36,7 @@ function NewBird() {
             navigate('/')
         }
 
-        dispatch(rereset())
+        dispatch(update())
     }, [dispatch, isError, isSuccess, navigate, message])
 
     if (isLoading) {

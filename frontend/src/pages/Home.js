@@ -9,10 +9,6 @@ function Home() {
     const {location} = useSelector((state) => state.current)
     const {birds, isSuccess, isLoading} = useSelector((state) => state.bird)
 
-    console.log("Seen:", birds)
-
-    //   const {last} = useSelector((state) => state.bird)
-
     const dispatch = useDispatch();
 
     useEffect(() => {

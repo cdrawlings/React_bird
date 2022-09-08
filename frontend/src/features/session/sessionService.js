@@ -32,14 +32,29 @@ const StartWatch = async (addData, token) => {
 
 
 // Get all birds seen by users
-const getWatch = async (sessId, token) => {
+const getWatch = async (token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
 
-    const response = await axios.get(API_URL + 'watch/' + sessId, config)
+    const response = await axios.get(API_URL + 'watch', config)
+
+    return response.data
+}
+
+
+// This adds the bird spotted and updates the number of birds seen
+// api/bird/start
+const addSpotted = async (addData, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.put(API_URL + "watch", addData, config)
 
     return response.data
 }
@@ -48,7 +63,8 @@ const getWatch = async (sessId, token) => {
 const sessionService = {
     AddSession,
     StartWatch,
-    getWatch
+    getWatch,
+    addSpotted
 }
 
 export default sessionService

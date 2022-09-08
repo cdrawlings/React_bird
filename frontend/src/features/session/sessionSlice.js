@@ -51,14 +51,13 @@ export const StartWatch = createAsyncThunk(
 )
 
 
-// This gets the bird information needed to track birds counted
-// Bird counting/spotting page
-// api/bird/watching/:id
-export const getWatch = createAsyncThunk(
-    'session/getWatch', async (sessId, thunkAPI) => {
+// This saves the weather/location to the session DB as a prelude to tracking birds
+// api/bird/start
+export const addSpotted = createAsyncThunk(
+    'session/spotted', async (addData, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
-            return await sessionService.getWatch(sessId, token)
+            return await sessionService.addSpotted(addData, token)
         } catch (e) {
             const message =
                 (e.message &&
@@ -72,12 +71,32 @@ export const getWatch = createAsyncThunk(
 )
 
 
+// This gets the bird information needed to track birds counted
+// Bird counting/spotting page
+// api/bird/watching
+export const getWatch = createAsyncThunk(
+    'session/getWatch', async (_, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await sessionService.getWatch(token)
+        } catch (e) {
+            const message =
+                (e.message &&
+                    e.response.data &&
+                    e.response.data.message) ||
+                e.message || e.toString()
+
+            return thunkAPI.rejectWithValue(message)
+        }
+    },
+)
+
 
 export const sessionSlice = createSlice({
     name: "session",
     initialState,
     reducers: {
-        rereset: (state) => initialState
+        reset: (state) => initialState
     },
     extraReducers: (builder) => {
         builder
@@ -108,11 +127,24 @@ export const sessionSlice = createSlice({
             .addCase(getWatch.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(getWatch.fulfilled, (state) => {
+            .addCase(getWatch.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.watch = action.payload
+            })
+            .addCase(getWatch.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(addSpotted.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(addSpotted.fulfilled, (state) => {
                 state.isLoading = false
                 state.isSuccess = true
             })
-            .addCase(getWatch.rejected, (state, action) => {
+            .addCase(addSpotted.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
@@ -121,5 +153,5 @@ export const sessionSlice = createSlice({
 })
 
 
-export const {rereset} = sessionSlice.actions
+export const {reset} = sessionSlice.actions
 export default sessionSlice.reducer
