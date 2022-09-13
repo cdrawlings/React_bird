@@ -63,7 +63,7 @@ const  getBirds = asyncHandler(async (req, res) => {
 
 
 // get Last bird entered for user
-// Route GET api/bird/last
+// Route    GET api/bird/last
 const  getLast = asyncHandler(async (req, res) => {
     //Get user with ID  in JWT
 
@@ -154,8 +154,8 @@ const getWatch = asyncHandler(async (req, res) => {
 });
 
 
-// Post birds  from watching session
-// Route    POST api/bird/watch
+//  Post birds from watching session
+//  Route       POST api/bird/watch
 const postWatch = asyncHandler(async (req, res) => {
 
     const update = await Session.findOneAndUpdate(
@@ -172,13 +172,13 @@ const postWatch = asyncHandler(async (req, res) => {
         },
 
         /*
-          { $set:
+            { $set:
                 {
                     "count.$.comName": req.body.comName,
                     "count.$.SpeciesCode": req.body.speciesCode,
                     "count.$.count": req.body.count,
                 }
-        },
+            },
          */
     )
 
@@ -187,7 +187,7 @@ const postWatch = asyncHandler(async (req, res) => {
 });
 
 
-//   Update Wtch with caount
+//  Update Wtch with caount
 //  PUT /api/tickets/:id
 const updateCount = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user.id);

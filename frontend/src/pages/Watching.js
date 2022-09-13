@@ -6,7 +6,6 @@ import Modal from "react-modal"
 import {addSpotted, getWatch} from "../features/session/sessionSlice";
 import Spinner from "../components/Spinner"
 
-
 const customStyles = {
     content: {
         width: '80vw',
@@ -41,10 +40,8 @@ function Watching() {
     // Holds the data for a just spotted bird
     const [spotted, setSpotted] = useState('')
 
-
     console.log('Watch:', watch)
     console.log('Birds:', birds)
-
 
     const dispatch = useDispatch()
 
@@ -52,7 +49,6 @@ function Watching() {
         return () => {
             if (isSuccess) {
                 dispatch(reset())
-
             }
         }
     }, [dispatch, isSuccess])
@@ -84,13 +80,10 @@ function Watching() {
         setCount(c => Math.max(c - 1, 0));
     }
 
-
     const seenSub = (e) => {
-
     }
 
     const seenAdd = (e) => {
-
     }
 
     const addSeen = (e) => {
@@ -114,7 +107,6 @@ function Watching() {
         console.log("Modal:", spotted)
     }
 
-
     // Open/close Modal
     const openModal = () => setModalIsOpen(true)
     const closeModal = () => setModalIsOpen(false)
@@ -129,17 +121,17 @@ function Watching() {
     }
 
     /*
-            let getCount = {
-                id: watch._id,
-                comName: spotted.comName,
-                speciesCode: spotted.speciesCode,
-                birdid: spotted._id,
-                count,
-            }
+        let getCount = {
+            id: watch._id,
+            comName: spotted.comName,
+            speciesCode: spotted.speciesCode,
+            birdid: spotted._id,
+            count,
+        }
 
-            function combined(){
-            //    let results = birds.filter(({bird: {speciesCode: id1}}) => !seen.some(({count: {speciesCode: id2}}) => id2 === id1));
-            }
+        function combined(){
+        //    let results = birds.filter(({bird: {speciesCode: id1}}) => !seen.some(({count: {speciesCode: id2}}) => id2 === id1));
+        }
     */
 
     return (
@@ -230,5 +222,6 @@ function Watching() {
         </>
     );
 }
+
 
 export default Watching;
