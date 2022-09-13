@@ -6,6 +6,7 @@ import Modal from "react-modal"
 import {addSpotted, getWatch} from "../features/session/sessionSlice";
 import Spinner from "../components/Spinner"
 
+
 const customStyles = {
     content: {
         width: '80vw',
@@ -111,7 +112,6 @@ function Watching() {
         console.log("Dispatched")
         console.log("New Bird", newBird)
         console.log("Modal:", spotted)
-
     }
 
 
@@ -119,38 +119,37 @@ function Watching() {
     const openModal = () => setModalIsOpen(true)
     const closeModal = () => setModalIsOpen(false)
 
-    /*
-    let getCount = {
-        id: watch._id,
-        comName: spotted.comName,
-        speciesCode: spotted.speciesCode,
-        birdid: spotted._id,
-        count,
-    }
-
     const onChange = (e) => {
-        setFormData((prevState) => ({
-            ...prevState,
-            [e.target.id]: e.target.value,
-        }))
+        /*
+                 setFormData((prevState) => ({
+                     ...prevState,
+                     [e.target.id]: e.target.value,
+                 }))
+         */
     }
 
+    /*
+            let getCount = {
+                id: watch._id,
+                comName: spotted.comName,
+                speciesCode: spotted.speciesCode,
+                birdid: spotted._id,
+                count,
+            }
 
-
-
-
-    function combined(){
-    //    let results = birds.filter(({bird: {speciesCode: id1}}) => !seen.some(({count: {speciesCode: id2}}) => id2 === id1));
-    }
+            function combined(){
+            //    let results = birds.filter(({bird: {speciesCode: id1}}) => !seen.some(({count: {speciesCode: id2}}) => id2 === id1));
+            }
     */
 
-
     return (
-
-
+        <>
         <div className="main-add">
+
             <section className="content">
+
                 Now watching
+
                 {watch && (
                     <div>
                         <p id='watch-id'>Session ID: {watch._id}</p>
@@ -161,64 +160,53 @@ function Watching() {
                     </div>
                 )}
 
-
                 <div className="">
                     Seen
                     <ul id='seenlist' className='content'>
-
-
                         {watch.count.map((item) => {
                             return (
                                 <li className='spotted-item' key={item.comName}>
-
                                     <p className='spotted_name'>{item.comName}</p>
                                     <p className='hidden'>{item.speciesCode}</p>
-
-
                                 </li>
                             )
-
                         })}
                     </ul>
-
-
                 </div>
 
-                    <div className="">
-                        <p className='add-text'>Birds you have seen before.</p>
-                        <ul id='seenlist' className='content'>
+                <div className="">
+                    <p className='add-text'>Birds you have seen before.</p>
 
-                            {birds.map((bird) => {
-                                return (
-                                    <li className='spotted-item' key={bird.comName}>
+                    <ul id='seenlist' className='content'>
+                        {birds.map((bird) => {
+                            return (
+                                <li className='spotted-item' key={bird.comName}>
 
-                                        <p className='spotted_name'>{bird.comName}</p>
-                                        <p className='hidden'>{bird.speciesCode}</p>
+                                    <p className='spotted_name'>{bird.comName}</p>
+                                    <p className='hidden'>{bird.speciesCode}</p>
 
-                                        <div className="counter_elements">
-                                            <button onClick={() => {
-                                                setSpotted(bird);
-                                                setModalIsOpen(true);
-                                            }} className='add_button'>+
-                                            </button>
-                                        </div>
-                                    </li>
-                                )
-
-                            })}
-                        </ul>
-
-                    </div>
-
+                                    <div className="counter_elements">
+                                        <button onClick={() => {
+                                            setSpotted(bird);
+                                            setModalIsOpen(true);
+                                        }} className='add_button'>+
+                                        </button>
+                                    </div>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
 
             </section>
 
-
             <Modal isOpen={modalIsOpen} onRequestVlose={closeModal} style={customStyles}
                    contentLabel='Spotted'>
+
                 <div className="modal-header">
                     <button className='btn-close' onClick={closeModal}>X</button>
                 </div>
+
                 <div className="modal-body">
 
                     {spotted.comName}
@@ -226,20 +214,20 @@ function Watching() {
                     <div className="count-elem">
                         <button className="minus_button" onClick={minusOne}>-</button>
                         <input className="count_elem" placeholder={count} name={count}/>
-                        <input className='form-control' type="text" name="count" id=count" value={count}
-                                   onChange={onChange} placeholder='Email' required/>
-                            <button className=" add_button" onClick={addOne}>+</button>
-                        </div>
-
+                        <input className='form-control' type="text" name="count" id="count"
+                               onChange={onChange} placeholder="Email" value={count} required/>
+                        <button className=" add_button" onClick={addOne}>+</button>
                     </div>
 
-
-                    <div className=" modal-footer">
+                    <div className="modal-footer">
                         <button className="" onClick={addSeen}>Accept</button>
-
                     </div>
-                </Modal>
+
+                </div>
+
+            </Modal>
             </div>
+        </>
     );
 }
 

@@ -148,7 +148,6 @@ const getWatch = asyncHandler(async (req, res) => {
         throw new Error("User not found")
     }
 
-
     const session = await Session.find({user: user}).sort({createdAt: -1}).limit(1)
 
     res.status(200).json(session[0])
@@ -158,7 +157,6 @@ const getWatch = asyncHandler(async (req, res) => {
 // Post birds  from watching session
 // Route    POST api/bird/watch
 const postWatch = asyncHandler(async (req, res) => {
-
 
     const update = await Session.findOneAndUpdate(
         {
@@ -172,7 +170,6 @@ const postWatch = asyncHandler(async (req, res) => {
                 }
             }
         },
-
 
         /*
           { $set:
